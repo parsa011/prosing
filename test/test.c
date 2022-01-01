@@ -29,16 +29,25 @@ bool test_string_length()
 	return 5 == prosing_string_lenght("parsa");
 }
 
+bool test_string_reverse()
+{
+	string *str = prosing_string_init("parsa");
+	prosing_string_reverse(str);
+	return strcmp(str->value,"asrap") == 0;
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
-	"test string length"
+	"string length",
+	"reverse string"
 };
 
 bool (*test_functions[])() = {
     test_init_string,
     test_string_dup,
-	test_string_length
+	test_string_length,
+	test_string_reverse
 };
 
 void log_res(char *state,const char *fmt,...)

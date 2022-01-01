@@ -69,4 +69,18 @@ string *prosing_string_init(char *value)
 	return str;
 }
 
+void prosing_string_reverse(string *s)
+{
+    char temp = 0;
+	char *last_char = &s->value[s->len - 1],*first_char = s->value;
+	char ch;
+	for (int i=0;i < s->len / 2;i++) {
+		ch = *last_char;
+		*last_char = *first_char;
+		*first_char = ch;
+		first_char++;
+		last_char--;
+	}
+}
+
 #endif
