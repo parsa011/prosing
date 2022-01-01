@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdarg.h>
 #include <stdlib.h>
+
 #include "../prosing.h"
 
 #define DEFAULT "\033[0m"
@@ -10,7 +11,7 @@
 
 bool test_string_length()
 {
-	return 6 == prosing_string_lenght("parsa");
+	return 5 == prosing_string_lenght("parsa");
 }
 
 const char *test_functions_names[] = {
