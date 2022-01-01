@@ -9,16 +9,35 @@
 #define FAILED "\033[0;31m"
 #define SUCCESS "\033[0;32m"
 
+bool test_init_string()
+{
+    char *name = "parsa";
+    int str_len = strlen(name);
+    string *str = prosing_string_init(name);
+    return str_len = str->len && strcmp(name,str->value) == 0;
+}
+
+bool test_string_dup()
+{
+    char *str = "parsa";
+    char *new = prosing_string_dup(str);
+    return strcmp(str,new) == 0;
+}
+
 bool test_string_length()
 {
 	return 5 == prosing_string_lenght("parsa");
 }
 
 const char *test_functions_names[] = {
+    "init string",
+    "string duplicate",
 	"test string length"
 };
 
 bool (*test_functions[])() = {
+    test_init_string,
+    test_string_dup,
 	test_string_length
 };
 

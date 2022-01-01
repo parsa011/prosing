@@ -5,6 +5,10 @@
 #ifndef _PROSING_H
 #define _PROSING_H
 
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
 typedef struct string_t {
 	char *value;
 	int len;
@@ -15,6 +19,11 @@ typedef struct string_t {
  *	we will caluculate value len
  */
 string *prosing_string_init(char *value);
+
+/*
+ *	allocate and return duplicate of given string
+ */
+char *prosing_string_dup(char *);
 
 /*
  *	reverse string and save it into given string
@@ -29,6 +38,9 @@ void prosing_string_reverse(string *);
  */
 int prosing_string_lenght(char *);
 
+// ===========================
+// implementation of functions
+// ===========================
 
 int prosing_string_lenght(char *str)
 {
@@ -37,6 +49,24 @@ int prosing_string_lenght(char *str)
 	while (*temp++)
     	res++;
 	return res;
+}
+
+char *prosing_string_dup(char *str)
+{
+    int len = prosing_string_lenght(str);
+	char *new = (char *)malloc(len);
+	memcpy(new,str,len);
+	return new;
+}
+
+string *prosing_string_init(char *value)
+{
+    int len = prosing_string_lenght(value);
+    string *str = malloc(sizeof(string));
+    assert(str != NULL);
+    str->value = prosing_string_dup(value);
+    str->len = len;
+	return str;
 }
 
 #endif
