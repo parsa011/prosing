@@ -55,6 +55,8 @@ int prosing_string_lenght(char *);
 int prosing_string_compare(string *,char *);
 int prosing_string_ncompare(string *,char *,int);
 
+bool prosing_string_endwith(string *,char *);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -158,6 +160,23 @@ int prosing_string_ncompare(string *s1,char *s2,int n)
 			return 0;
 	}
 	return *s - *t;
+}
+
+bool prosing_string_endwith(string *str,char *t)
+{
+    char *bs = str->value;
+    char *bt = t;
+    char *ptr = str->value;
+    while (*ptr)
+        ptr++;
+    while (*t)
+        t++;
+    for (; *ptr == *t; ptr--,t--)
+        if (t == bt || ptr == bs)
+            break;
+   	if (*ptr == *t && *t == *bt && *ptr != '\0')
+       	return true;
+   	return false;
 }
 
 #endif
