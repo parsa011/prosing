@@ -49,6 +49,11 @@ bool prosing_string_contains_string(string *,char *);
  */
 int prosing_string_lenght(char *);
 
+/*
+ *	compare two string , it works like strcpm
+ */
+int prosing_string_compare(string *,char *);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -130,6 +135,15 @@ bool prosing_string_contains_string(string *str,char *s)
 		}
 	}
 	return false;
+}
+
+int prosing_string_compare(string *s1,char *s2)
+{
+	for ( ; *s1->value == *s2;s1->value++,s2++) {
+		if (*s1->value == '\0')
+			return 0;
+	}
+	return *s1->value - *s2;
 }
 
 #endif

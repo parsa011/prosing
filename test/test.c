@@ -47,13 +47,20 @@ bool test_contains_string()
 	return prosing_string_contains_string(str,"parsa");
 }
 
+bool test_string_compare()
+{
+	string *str = prosing_string_init("parsa");
+	return prosing_string_compare(str,"parsa") == 0;
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
 	"string length",
 	"reverse string",
 	"string contains char",
-	"string contains string"
+	"string contains string",
+	"compare string full"
 };
 
 bool (*test_functions[])() = {
@@ -62,7 +69,8 @@ bool (*test_functions[])() = {
 	test_string_length,
 	test_string_reverse,
 	test_contains_char,
-	test_contains_string
+	test_contains_string,
+	test_string_compare
 };
 
 void log_res(char *state,const char *fmt,...)
