@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdarg.h>
 #include <stdlib.h>
 
@@ -36,18 +35,26 @@ bool test_string_reverse()
 	return strcmp(str->value,"asrap") == 0;
 }
 
+bool test_contains_char()
+{
+	string *str = prosing_string_init("parsa");
+	return prosing_string_contains_char(str,'p');
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
 	"string length",
-	"reverse string"
+	"reverse string",
+	"string contains char"
 };
 
 bool (*test_functions[])() = {
     test_init_string,
     test_string_dup,
 	test_string_length,
-	test_string_reverse
+	test_string_reverse,
+	test_contains_char
 };
 
 void log_res(char *state,const char *fmt,...)

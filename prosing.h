@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdbool.h>
 
 typedef struct string_t {
 	char *value;
@@ -29,6 +30,16 @@ char *prosing_string_dup(char *);
  *	reverse string and save it into given string
  */
 void prosing_string_reverse(string *);
+
+/*
+ *	check if given check exist in string
+ */
+bool prosing_string_contains_char(string *,char);
+
+/*
+ *	check if given string exist in string
+ */
+bool prosing_string_contains_string(string *,char *);
 
 /*
  *	functions declerations, work with char
@@ -61,6 +72,7 @@ char *prosing_string_dup(char *str)
 
 string *prosing_string_init(char *value)
 {
+	assert(value != NULL);
     int len = prosing_string_lenght(value);
     string *str = malloc(sizeof(string));
     assert(str != NULL);
@@ -81,6 +93,17 @@ void prosing_string_reverse(string *s)
 		first_char++;
 		last_char--;
 	}
+}
+
+bool prosing_string_contains_char(string *str,char c)
+{
+	char *s = str->value;
+	while (*s) {
+		if (*s == c)
+			return true;
+		s++;
+	}
+	return false;
 }
 
 #endif
