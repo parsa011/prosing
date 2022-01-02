@@ -53,6 +53,12 @@ bool test_string_compare()
 	return prosing_string_compare(str,"parsa") == 0;
 }
 
+bool test_string_ncompare()
+{
+	string *str = prosing_string_init("parsa");
+	return prosing_string_ncompare(str,"parsa",3) == 0;
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
@@ -60,7 +66,8 @@ const char *test_functions_names[] = {
 	"reverse string",
 	"string contains char",
 	"string contains string",
-	"compare string full"
+	"compare string full",
+	"ncompare test"
 };
 
 bool (*test_functions[])() = {
@@ -70,7 +77,8 @@ bool (*test_functions[])() = {
 	test_string_reverse,
 	test_contains_char,
 	test_contains_string,
-	test_string_compare
+	test_string_compare,
+	test_string_ncompare
 };
 
 void log_res(char *state,const char *fmt,...)
