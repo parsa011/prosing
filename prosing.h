@@ -35,11 +35,19 @@ void prosing_string_reverse(string *);
  *	check if given check exist in string
  */
 bool prosing_string_contains_char(string *,char);
+/*
+ *	return how many time given char repeated in string
+ */
+int prosing_string_ncontains_char(string *,char);
 
 /*
  *	check if given string exist in string
  */
 bool prosing_string_contains_string(string *,char *);
+/*
+ *	return how many time given string repeated in string
+ */
+int prosing_string_ncontains_string(string *,char *);
 
 /*
  *	functions declerations, work with char
@@ -115,6 +123,18 @@ bool prosing_string_contains_char(string *str,char c)
 	return false;
 }
 
+int prosing_string_ncontains_char(string *str,char c)
+{
+	char *s = str->value;
+	int res = 0;
+	while (*s) {
+		if (*s == c)
+			res++;
+		s++;
+	}
+	return res;
+}
+
 bool prosing_string_contains_string(string *str,char *s)
 {
 	int s_len = prosing_string_lenght(s);
@@ -138,6 +158,32 @@ bool prosing_string_contains_string(string *str,char *s)
 		}
 	}
 	return false;
+}
+
+int prosing_string_ncontains_string(string *str,char *s)
+{
+	int s_len = prosing_string_lenght(s);
+	// if second string is bigger than first one , it's not possible to be in first one :)
+	if (s_len > str->len)
+		return false;
+	int i,j,k;
+	int res = 0;
+	for (i = 0;i < str->len;i++) {
+		if (str->value[i] == s[0]) {
+			bool exist = true;
+			for (k = i,j = 0;j < s_len;j++,k++) {
+				if (str->value[k] == s[j])
+					exist = true;
+				else {
+					exist = false;
+					break;
+				}
+			}
+			if (exist)
+				res++;
+		}
+	}
+	return res;
 }
 
 int prosing_string_compare(string *s1,char *s2)

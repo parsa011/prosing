@@ -41,10 +41,22 @@ bool test_contains_char()
 	return prosing_string_contains_char(str,'p');
 }
 
+bool test_ncontains_char()
+{
+	string *str = prosing_string_init("/par/sa/ //    mahmou/dy/");
+	return prosing_string_ncontains_char(str,'/') == 7;
+}
+
 bool test_contains_string()
 {
 	string *str = prosing_string_init("parsa");
 	return prosing_string_contains_string(str,"parsa");
+}
+
+bool test_ncontains_string()
+{
+	string *str = prosing_string_init("paarsaa aa maahmoudy");
+	return prosing_string_ncontains_string(str,"aa") == 4;
 }
 
 bool test_string_compare()
@@ -71,7 +83,9 @@ const char *test_functions_names[] = {
 	"string length",
 	"reverse string",
 	"string contains char",
+	"string ncontains cahr ",
 	"string contains string",
+	"string ncontains string",
 	"compare string full",
 	"ncompare test",
 	"end with"
@@ -83,7 +97,9 @@ bool (*test_functions[])() = {
 	test_string_length,
 	test_string_reverse,
 	test_contains_char,
+	test_ncontains_char,
 	test_contains_string,
+	test_ncontains_string,
 	test_string_compare,
 	test_string_ncompare,
 	test_endwith
