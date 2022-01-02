@@ -69,6 +69,7 @@ bool prosing_string_endwith(string *,char *);
  *	append t to last of str
  */
 void prosing_string_append(string *,char *);
+void prosing_string_append_char(string *,char);
 
 // ===========================
 // implementation of functions
@@ -238,6 +239,15 @@ void prosing_string_append(string *str,char *t)
 	char *ptr = str->value + str->len;
 	while (*ptr++ = *t++);
 	str->len += t_len;
+}
+
+void prosing_string_append_char(string *str,char c)
+{
+	str->len += 1;
+	str->value = (char *)realloc(str->value,str->len + 1);
+	char *ptr = str->value + str->len - 1;
+	*ptr++ = c;
+	*ptr = '\0';
 }
 
 #endif
