@@ -66,6 +66,7 @@ char *prosing_string_dup(char *str)
 {
     int len = prosing_string_lenght(str);
 	char *new = (char *)malloc(len);
+	assert(new != NULL);
 	memcpy(new,str,len);
 	return new;
 }
@@ -102,6 +103,31 @@ bool prosing_string_contains_char(string *str,char c)
 		if (*s == c)
 			return true;
 		s++;
+	}
+	return false;
+}
+
+bool prosing_string_contains_string(string *str,char *s)
+{
+	int s_len = prosing_string_lenght(s);
+	// if second string is bigger than first one , it's not possible to be in first one :)
+	if (s_len > str->len)
+		return false;
+	int i,j,k;
+	for (i = 0;i < str->len;i++) {
+		if (str->value[i] == s[0]) {
+			bool exist = true;
+			for (k = i,j = 0;j < s_len;j++,k++) {
+				if (str->value[k] == s[j])
+					exist = true;
+				else {
+					exist = false;
+					break;
+				}
+			}
+			if (exist)
+				return true;
+		}
 	}
 	return false;
 }
