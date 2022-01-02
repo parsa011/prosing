@@ -65,6 +65,11 @@ int prosing_string_ncompare(string *,char *,int);
 
 bool prosing_string_endwith(string *,char *);
 
+/*
+ *	append t to last of str
+ */
+void prosing_string_append(string *,char *);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -81,7 +86,7 @@ int prosing_string_lenght(char *str)
 char *prosing_string_dup(char *str)
 {
     int len = prosing_string_lenght(str);
-	char *new = (char *)malloc(len);
+	char *new = (char *)malloc(len + 1);
 	assert(new != NULL);
 	memcpy(new,str,len);
 	return new;
@@ -223,6 +228,16 @@ bool prosing_string_endwith(string *str,char *t)
    	if (*ptr == *t && *t == *bt && *ptr != '\0')
        	return true;
    	return false;
+}
+
+void prosing_string_append(string *str,char *t)
+{
+	assert(t != NULL);
+	int t_len = prosing_string_lenght(t);
+	str->value = (char *)realloc(str->value,str->len + 1);
+	char *ptr = str->value + str->len;
+	while (*ptr++ = *t++);
+	str->len += t_len;
 }
 
 #endif

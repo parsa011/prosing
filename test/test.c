@@ -77,6 +77,13 @@ bool test_endwith()
 	return prosing_string_endwith(str,"rsa");
 }
 
+bool test_string_append()
+{
+	string *str = prosing_string_init("parsa");
+	prosing_string_append(str," mahmoudy");
+	return strcmp(str->value,"parsa mahmoudy") == 0;
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
@@ -88,7 +95,8 @@ const char *test_functions_names[] = {
 	"string ncontains string",
 	"compare string full",
 	"ncompare test",
-	"end with"
+	"end with",
+	"string append"
 };
 
 bool (*test_functions[])() = {
@@ -102,7 +110,8 @@ bool (*test_functions[])() = {
 	test_ncontains_string,
 	test_string_compare,
 	test_string_ncompare,
-	test_endwith
+	test_endwith,
+	test_string_append
 };
 
 void log_res(char *state,const char *fmt,...)
