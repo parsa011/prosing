@@ -81,7 +81,15 @@ void prosing_string_insert_char(string *,char,int);
  */
 void prosing_string_insert_string(string *,char *,int);
 
+/*
+ *	substing and save new string in given str
+ */
 void prosing_string_substring(string *,int,int);
+
+/*
+ *	remove character at given position from string
+ */
+void prosing_string_remove(string *,int);
 
 // ===========================
 // implementation of functions
@@ -297,6 +305,15 @@ void prosing_string_substring(string *str,int from,int to)
 	for (int i = 0;i < str->len; i++) {
 		str->value[i] = *ptr_from++;
 	}
+	str->value[str->len] = '\0';
+}
+
+void prosing_string_remove(string *str,int at)
+{
+	at--;
+	assert(at <= str->len && at >= 0);
+	str->len--;
+	memcpy(&str->value[at],&str->value[at + 1],str->len - at);
 	str->value[str->len] = '\0';
 }
 
