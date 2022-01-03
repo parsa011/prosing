@@ -76,6 +76,11 @@ void prosing_string_append_char(string *,char);
  */
 void prosing_string_insert_char(string *,char,int);
 
+/*
+ *	insert string into string
+ */
+void prosing_string_insert_string(string *,char *,int);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -264,6 +269,20 @@ void prosing_string_insert_char(string *str,char c,int at)
 	memcpy(&str->value[at + 1],&str->value[at],str->len - at + 1);
 	str->value[at] = c;
 	str->value[str->len] = '\0';
+}
+
+void prosing_string_insert_string(string *str,char *s,int at)
+{
+	at -= 1;
+	assert(at <= str->len && at >= 0);
+	int s_len = prosing_string_lenght(s);
+	str->len += s_len;
+	str->value = (char *)realloc(str->value,str->len + 1);
+	memcpy(&str->value[at + s_len],&str->value[at],str->len - s_len - at + 1);
+	char *ptr = &str->value[at];
+	while (*s) {
+		*ptr++ = *s++;
+	}
 }
 
 #endif

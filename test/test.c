@@ -99,6 +99,14 @@ bool test_insert_char()
 	return prosing_string_compare(str,"parsa") == 0;
 }
 
+bool test_insert_string()
+{
+	string *str = prosing_string_init("pmahmoudy");
+	prosing_string_insert_string(str,"arsa ",2);
+	return prosing_string_compare(str,"parsa mahmoudy") == 0;
+
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
@@ -113,7 +121,8 @@ const char *test_functions_names[] = {
 	"end with",
 	"string append",
 	"string append char",
-	"string insert char"
+	"string insert char",
+	"string insert string"
 };
 
 bool (*test_functions[])() = {
@@ -130,7 +139,8 @@ bool (*test_functions[])() = {
 	test_endwith,
 	test_string_append,
 	test_string_append_char,
-	test_insert_char
+	test_insert_char,
+	test_insert_string
 };
 
 void log_res(char *state,const char *fmt,...)
