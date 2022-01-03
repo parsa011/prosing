@@ -25,7 +25,7 @@ bool test_string_dup()
 
 bool test_string_length()
 {
-	return 5 == prosing_string_lenght("parsa");
+	return 5 == prosing_string_length("parsa");
 }
 
 bool test_string_reverse()

@@ -55,7 +55,7 @@ int prosing_string_ncontains_string(string *,char *);
  *  dont need to call function to calculate string
  *  len
  */
-int prosing_string_lenght(char *);
+int prosing_string_length(char *);
 
 /*
  *	compare two string , it works like strcpm
@@ -85,7 +85,7 @@ void prosing_string_insert_string(string *,char *,int);
 // implementation of functions
 // ===========================
 
-int prosing_string_lenght(char *str)
+int prosing_string_length(char *str)
 {
 	int res = 0;
 	char *temp = str;
@@ -96,7 +96,7 @@ int prosing_string_lenght(char *str)
 
 char *prosing_string_dup(char *str)
 {
-    int len = prosing_string_lenght(str);
+    int len = prosing_string_length(str);
 	char *new = (char *)malloc(len + 1);
 	assert(new != NULL);
 	memcpy(new,str,len);
@@ -106,7 +106,7 @@ char *prosing_string_dup(char *str)
 string *prosing_string_init(char *value)
 {
 	assert(value != NULL);
-    int len = prosing_string_lenght(value);
+    int len = prosing_string_length(value);
     string *str = malloc(sizeof(string));
     assert(str != NULL);
     str->value = prosing_string_dup(value);
@@ -153,7 +153,7 @@ int prosing_string_ncontains_char(string *str,char c)
 
 bool prosing_string_contains_string(string *str,char *s)
 {
-	int s_len = prosing_string_lenght(s);
+	int s_len = prosing_string_length(s);
 	// if second string is bigger than first one , it's not possible to be in first one :)
 	if (s_len > str->len)
 		return false;
@@ -178,7 +178,7 @@ bool prosing_string_contains_string(string *str,char *s)
 
 int prosing_string_ncontains_string(string *str,char *s)
 {
-	int s_len = prosing_string_lenght(s);
+	int s_len = prosing_string_length(s);
 	// if second string is bigger than first one , it's not possible to be in first one :)
 	if (s_len > str->len)
 		return false;
@@ -244,7 +244,7 @@ bool prosing_string_endwith(string *str,char *t)
 void prosing_string_append(string *str,char *t)
 {
 	assert(t != NULL);
-	int t_len = prosing_string_lenght(t);
+	int t_len = prosing_string_length(t);
 	str->value = (char *)realloc(str->value,str->len + 1);
 	char *ptr = str->value + str->len;
 	while (*ptr++ = *t++);
@@ -275,7 +275,7 @@ void prosing_string_insert_string(string *str,char *s,int at)
 {
 	at -= 1;
 	assert(at <= str->len && at >= 0);
-	int s_len = prosing_string_lenght(s);
+	int s_len = prosing_string_length(s);
 	str->len += s_len;
 	str->value = (char *)realloc(str->value,str->len + 1);
 	memcpy(&str->value[at + s_len],&str->value[at],str->len - s_len - at + 1);
