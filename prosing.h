@@ -71,6 +71,11 @@ bool prosing_string_endwith(string *,char *);
 void prosing_string_append(string *,char *);
 void prosing_string_append_char(string *,char);
 
+/*
+ *	insert char at specified location in string
+ */
+void prosing_string_insert_char(string *,char,int);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -248,6 +253,17 @@ void prosing_string_append_char(string *str,char c)
 	char *ptr = str->value + str->len - 1;
 	*ptr++ = c;
 	*ptr = '\0';
+}
+
+void prosing_string_insert_char(string *str,char c,int at)
+{
+	at -= 1;
+	assert(at <= str->len && at >= 0);
+	str->len++;
+	str->value = (char *)realloc(str->value,str->len + 1);
+	memcpy(&str->value[at + 1],&str->value[at],str->len - at + 1);
+	str->value[at] = c;
+	str->value[str->len] = '\0';
 }
 
 #endif

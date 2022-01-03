@@ -38,24 +38,24 @@ bool test_string_reverse()
 bool test_contains_char()
 {
 	string *str = prosing_string_init("parsa");
-	return prosing_string_contains_char(str,'p');
+	return prosing_string_contains_char(str,'a');
 }
 
 bool test_ncontains_char()
 {
-	string *str = prosing_string_init("/par/sa/ //    mahmou/dy/");
+	string *str = prosing_string_init("/par/sa/ / /    mahmou/dy/");
 	return prosing_string_ncontains_char(str,'/') == 7;
 }
 
 bool test_contains_string()
 {
 	string *str = prosing_string_init("parsa");
-	return prosing_string_contains_string(str,"parsa");
+	return prosing_string_contains_string(str,"rsa");
 }
 
 bool test_ncontains_string()
 {
-	string *str = prosing_string_init("paarsaa aa maahmoudy");
+	string *str = prosing_string_init("paars  ///aa aa maahmoudy");
 	return prosing_string_ncontains_string(str,"aa") == 4;
 }
 
@@ -74,7 +74,7 @@ bool test_string_ncompare()
 bool test_endwith()
 {
 	string *str = prosing_string_init("parsa");
-	return prosing_string_endwith(str,"rsa");
+	return prosing_string_endwith(str,"sa");
 }
 
 bool test_string_append()
@@ -92,6 +92,13 @@ bool test_string_append_char()
 	return strcmp(str->value,"parsa12") == 0;
 }
 
+bool test_insert_char()
+{
+	string *str = prosing_string_init("prsa");
+	prosing_string_insert_char(str,'a',2);
+	return prosing_string_compare(str,"parsa") == 0;
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
@@ -105,7 +112,8 @@ const char *test_functions_names[] = {
 	"ncompare test",
 	"end with",
 	"string append",
-	"string append char"
+	"string append char",
+	"string insert char"
 };
 
 bool (*test_functions[])() = {
@@ -121,7 +129,8 @@ bool (*test_functions[])() = {
 	test_string_ncompare,
 	test_endwith,
 	test_string_append,
-	test_string_append_char
+	test_string_append_char,
+	test_insert_char
 };
 
 void log_res(char *state,const char *fmt,...)
