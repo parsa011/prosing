@@ -90,6 +90,7 @@ void prosing_string_substring(string *,int,int);
  *	remove character at given position from string
  */
 void prosing_string_remove(string *,int);
+void prosing_string_remove_range(string *,int,int);
 
 // ===========================
 // implementation of functions
@@ -314,6 +315,27 @@ void prosing_string_remove(string *str,int at)
 	assert(at <= str->len && at >= 0);
 	str->len--;
 	memcpy(&str->value[at],&str->value[at + 1],str->len - at);
+	str->value[str->len] = '\0';
+}
+
+void prosing_string_remove_range(string *str,int from,int to)
+{
+	from--;
+	to--;
+	assert(to >= from && from >= 0 && to <= str->len - 1);
+	int offset = to - from + 1;
+	str->len -= offset;
+	char *ptr = &str->value[to + 1];
+	while (*ptr) {
+    	*(ptr - offset) = *ptr;
+    	ptr++;
+	}
+	//char *ptr = &str->value[from];
+	//for (int i = from; i < str->len;i++) {
+	//	char temp = *ptr;
+	//	*ptr = *(ptr + i);
+	//	*(ptr + i) = temp;
+	//}
 	str->value[str->len] = '\0';
 }
 

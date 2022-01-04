@@ -120,6 +120,13 @@ bool test_remove_at()
 	string *str = prosing_string_init("p1arsa");
 	prosing_string_remove(str,2);
 	return prosing_string_compare(str,"parsa") == 0;
+}
+
+bool test_remove_range()
+{
+	string *str = prosing_string_init("p    arsa");
+	prosing_string_remove_range(str,2,5);
+	return prosing_string_compare(str,"parsa") == 0;
 
 }
 
@@ -140,7 +147,8 @@ const char *test_functions_names[] = {
 	"string insert char",
 	"string insert string",
 	"substring",
-	"remove at"
+	"remove at",
+	"remove range"
 };
 
 bool (*test_functions[])() = {
@@ -160,7 +168,8 @@ bool (*test_functions[])() = {
 	test_insert_char,
 	test_insert_string,
 	test_substring,
-	test_remove_at
+	test_remove_at,
+	test_remove_range
 };
 
 void log_res(char *state,const char *fmt,...)
