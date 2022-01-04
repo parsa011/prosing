@@ -136,13 +136,31 @@ bool test_replace()
 	return prosing_string_compare(str,"p 222 r 222 sa 222") == 0;
 }
 
+bool test_split()
+{
+    char *expected[] = {
+		"pa",
+		"rsa",
+		" mahmou",
+		"dy"
+    };
+	string *str = prosing_string_init("pa//rsa// mahmou//dy");
+	char **splited = prosing_string_split(str,"//");
+	int index = 0;
+	while (*splited) {
+    	if (strcmp(*splited++,*(expected + index++)) != 0)
+        	return false;
+	}
+	return true;
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
 	"string length",
 	"reverse string",
 	"string contains char",
-	"string ncontains cahr ",
+	"string ncontains char",
 	"string contains string",
 	"string ncontains string",
 	"compare string full",
@@ -155,7 +173,8 @@ const char *test_functions_names[] = {
 	"substring",
 	"remove at",
 	"remove range",
-	"replace"
+	"replace",
+	"string split"
 };
 
 bool (*test_functions[])() = {
@@ -177,7 +196,8 @@ bool (*test_functions[])() = {
 	test_substring,
 	test_remove_at,
 	test_remove_range,
-	test_replace
+	test_replace,
+	test_split
 };
 
 void log_res(char *state,const char *fmt,...)

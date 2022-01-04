@@ -97,6 +97,11 @@ char *prosing_string_remove_range(string *,int,int);
  */
 char *prosing_string_replace(string *,char *,char *);
 
+/*
+ *	split given stirng by another string
+ */
+char **prosing_string_split(string *,char *);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -373,6 +378,61 @@ char *prosing_string_replace(string *str,char *old,char *new)
 		}
 	}
 	return str->value;
+}
+
+char **prosing_string_split(string *str,char *delim)
+{
+#define BUFSIZE 5
+#define ELEMSIZE 20
+	int delim_len = prosing_string_length(delim);
+	int buf_size = BUFSIZE;
+	int elem_size = ELEMSIZE;
+	char **buf = (char **)calloc(buf_size,sizeof(char *));
+	char *elem = (char *)malloc(elem_size);
+	int elemp = 0;
+	int bufp = 0;
+	for (int i = 0; i < str->len;i++) {
+    	if (bufp == buf_size - 1) {
+			buf_size += BUFSIZE;
+			buf = (char **)realloc(buf,buf_size * sizeof(char *));
+    	}
+		if (elemp == elem_size - 1) {
+			elem_size += ELEMSIZE;
+			elem = (char *)realloc(elem,elem_size);
+		}
+		if (str->value[i] == delim[0]) {
+			bool is_delim = true;
+			int j,k;
+			for (k = i,j = 0;j < delim_len;j++,k++) {
+				if (str->value[k] == delim[j])
+					is_delim = true;
+				else {
+					is_delim = false;
+					break;
+				}
+			}
+			if (is_delim) {
+    			if (elemp == 0) {
+        			goto go_next;
+    			}
+append:
+    			elem[elemp] = 0;
+    			buf[bufp++] = prosing_string_dup(elem);
+    			elemp = 0;
+    			elem_size = ELEMSIZE;
+go_next:
+    			i += delim_len - 1;
+    			continue;
+			}
+		}
+		*(elem + elemp++) = str->value[i];
+		if (i == str->len - 1)
+    		goto append;
+	}
+	buf[bufp] = 0;
+#undef BUFSIZE
+#undef ELEMSIZE
+	return buf;
 }
 
 #endif
