@@ -92,6 +92,11 @@ char *prosing_string_substring(string *,int,int);
 char *prosing_string_remove(string *,int);
 char *prosing_string_remove_range(string *,int,int);
 
+/*
+ *	replace old with new in given string and return string
+ */
+char *prosing_string_replace(string *,char *,char *);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -338,6 +343,35 @@ char *prosing_string_remove_range(string *str,int from,int to)
     	ptr++;
 	}
 	str->value[str->len] = '\0';
+	return str->value;
+}
+
+char *prosing_string_replace(string *str,char *old,char *new)
+{
+	int old_len = prosing_string_length(old);
+	int new_len = prosing_string_length(new);
+	// if second string is bigger than first one , it's not possible to be in first one :)
+	if (old_len > str->len)
+    	return str->value;
+	int i,j,k;
+	for (i = 0;i < str->len;i++) {
+		if (str->value[i] == old[0]) {
+			bool need_replace = true;
+			for (k = i,j = 0;j < old_len;j++,k++) {
+				if (str->value[k] == old[j])
+					need_replace = true;
+				else {
+					need_replace = false;
+					break;
+				}
+			}
+			if (need_replace) {
+    			prosing_string_remove_range(str,i + 1,k);
+    			prosing_string_insert_string(str,new,i + 1);
+    			i += new_len - 1;
+			}
+		}
+	}
 	return str->value;
 }
 
