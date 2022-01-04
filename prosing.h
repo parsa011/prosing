@@ -29,7 +29,7 @@ char *prosing_string_dup(char *);
 /*
  *	reverse string and save it into given string
  */
-void prosing_string_reverse(string *);
+char *prosing_string_reverse(string *);
 
 /*
  *	check if given check exist in string
@@ -68,29 +68,29 @@ bool prosing_string_endwith(string *,char *);
 /*
  *	append t to last of str
  */
-void prosing_string_append(string *,char *);
-void prosing_string_append_char(string *,char);
+char *prosing_string_append(string *,char *);
+char *prosing_string_append_char(string *,char);
 
 /*
  *	insert char at specified location in string
  */
-void prosing_string_insert_char(string *,char,int);
+char *prosing_string_insert_char(string *,char,int);
 
 /*
  *	insert string into string
  */
-void prosing_string_insert_string(string *,char *,int);
+char *prosing_string_insert_string(string *,char *,int);
 
 /*
  *	substing and save new string in given str
  */
-void prosing_string_substring(string *,int,int);
+char *prosing_string_substring(string *,int,int);
 
 /*
  *	remove character at given position from string
  */
-void prosing_string_remove(string *,int);
-void prosing_string_remove_range(string *,int,int);
+char *prosing_string_remove(string *,int);
+char *prosing_string_remove_range(string *,int,int);
 
 // ===========================
 // implementation of functions
@@ -125,7 +125,7 @@ string *prosing_string_init(char *value)
 	return str;
 }
 
-void prosing_string_reverse(string *s)
+char *prosing_string_reverse(string *s)
 {
     char temp = 0;
 	char *last_char = &s->value[s->len - 1],*first_char = s->value;
@@ -137,6 +137,7 @@ void prosing_string_reverse(string *s)
 		first_char++;
 		last_char--;
 	}
+	return s->value;
 }
 
 bool prosing_string_contains_char(string *str,char c)
@@ -252,7 +253,7 @@ bool prosing_string_endwith(string *str,char *t)
    	return false;
 }
 
-void prosing_string_append(string *str,char *t)
+char *prosing_string_append(string *str,char *t)
 {
 	assert(t != NULL);
 	int t_len = prosing_string_length(t);
@@ -260,18 +261,20 @@ void prosing_string_append(string *str,char *t)
 	char *ptr = str->value + str->len;
 	while (*ptr++ = *t++);
 	str->len += t_len;
+	return str->value;
 }
 
-void prosing_string_append_char(string *str,char c)
+char *prosing_string_append_char(string *str,char c)
 {
 	str->len += 1;
 	str->value = (char *)realloc(str->value,str->len + 1);
 	char *ptr = str->value + str->len - 1;
 	*ptr++ = c;
 	*ptr = '\0';
+	return str->value;
 }
 
-void prosing_string_insert_char(string *str,char c,int at)
+char *prosing_string_insert_char(string *str,char c,int at)
 {
 	at--;
 	assert(at <= str->len && at >= 0);
@@ -280,9 +283,10 @@ void prosing_string_insert_char(string *str,char c,int at)
 	memcpy(&str->value[at + 1],&str->value[at],str->len - at + 1);
 	str->value[at] = c;
 	str->value[str->len] = '\0';
+	return str->value;
 }
 
-void prosing_string_insert_string(string *str,char *s,int at)
+char *prosing_string_insert_string(string *str,char *s,int at)
 {
 	at--;
 	assert(at <= str->len && at >= 0);
@@ -294,31 +298,34 @@ void prosing_string_insert_string(string *str,char *s,int at)
 	while (*s) {
 		*ptr++ = *s++;
 	}
+	return str->value;
 }
 
-void prosing_string_substring(string *str,int from,int to)
+char *prosing_string_substring(string *str,int from,int to)
 {
 	from--;
 	to--;
-	assert(to >= from && from >= 0 && to <= str->len - 1);	
+	assert(to >= from && from >= 0 && to <= str->len - 1);
 	str->len = to - from + 1;
 	char *ptr_from = &str->value[from];
 	for (int i = 0;i < str->len; i++) {
 		str->value[i] = *ptr_from++;
 	}
 	str->value[str->len] = '\0';
+	return str->value;
 }
 
-void prosing_string_remove(string *str,int at)
+char *prosing_string_remove(string *str,int at)
 {
 	at--;
 	assert(at <= str->len && at >= 0);
 	str->len--;
 	memcpy(&str->value[at],&str->value[at + 1],str->len - at);
 	str->value[str->len] = '\0';
+	return str->value;
 }
 
-void prosing_string_remove_range(string *str,int from,int to)
+char *prosing_string_remove_range(string *str,int from,int to)
 {
 	from--;
 	to--;
@@ -330,13 +337,8 @@ void prosing_string_remove_range(string *str,int from,int to)
     	*(ptr - offset) = *ptr;
     	ptr++;
 	}
-	//char *ptr = &str->value[from];
-	//for (int i = from; i < str->len;i++) {
-	//	char temp = *ptr;
-	//	*ptr = *(ptr + i);
-	//	*(ptr + i) = temp;
-	//}
 	str->value[str->len] = '\0';
+	return str->value;
 }
 
 #endif
