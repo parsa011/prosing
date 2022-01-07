@@ -154,6 +154,16 @@ bool test_split()
 	return true;
 }
 
+bool test_join()
+{
+	char *array[] = {
+		"parsa",
+		"mahmoudy",
+		NULL
+	};
+	string *str = prosing_string_join(array," ");
+	return strcmp(str->value,"parsa mahmoudy") == 0;
+}
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
@@ -174,7 +184,8 @@ const char *test_functions_names[] = {
 	"remove at",
 	"remove range",
 	"replace",
-	"string split"
+	"string split",
+	"join"
 };
 
 bool (*test_functions[])() = {
@@ -197,7 +208,8 @@ bool (*test_functions[])() = {
 	test_remove_at,
 	test_remove_range,
 	test_replace,
-	test_split
+	test_split,
+	test_join
 };
 
 void log_res(char *state,const char *fmt,...)

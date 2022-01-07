@@ -102,6 +102,11 @@ char *prosing_string_replace(string *,char *,char *);
  */
 char **prosing_string_split(string *,char *);
 
+/*
+ *	make string and join args elements
+ */
+string *prosing_string_join(char **args,char *);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -271,6 +276,7 @@ char *prosing_string_append(string *str,char *t)
 	char *ptr = str->value + str->len;
 	while (*ptr++ = *t++);
 	str->len += t_len;
+	str->value[str->len] = '\0';
 	return str->value;
 }
 
@@ -433,6 +439,27 @@ go_next:
 #undef BUFSIZE
 #undef ELEMSIZE
 	return buf;
+}
+
+string *prosing_string_join(char **args,char *with)
+{
+    int with_len = prosing_string_length(with);
+    int len = 0;
+    int i = 0;
+    while (*(args + i)) {
+        len += prosing_string_length(*(args + i++));
+		if (*(args + i))
+    		len += with_len;
+	}
+	string *str = malloc(sizeof(string *));
+	str->len = 0;
+	while (*args) {
+    	prosing_string_append(str,*args++);
+    	if (*args) {
+			prosing_string_append(str,with);
+    	}
+	}
+	return str;
 }
 
 #endif
