@@ -10,6 +10,8 @@
 #include <assert.h>
 #include <stdbool.h>
 
+#define null_str ((string){ NULL, 0 })
+
 typedef struct string_t {
 	char *value;
 	int len;
@@ -34,20 +36,20 @@ char *prosing_string_reverse(string *);
 /*
  *	check if given check exist in string
  */
-bool prosing_string_contains_char(string *,char);
+bool prosing_string_contains_char(string *, char);
 /*
  *	return how many time given char repeated in string
  */
-int prosing_string_ncontains_char(string *,char);
+int prosing_string_ncontains_char(string *, char);
 
 /*
  *	check if given string exist in string
  */
-bool prosing_string_contains_string(string *,char *);
+bool prosing_string_contains_string(string *, char *);
 /*
  *	return how many time given string repeated in string
  */
-int prosing_string_ncontains_string(string *,char *);
+int prosing_string_ncontains_string(string *, char *);
 
 /*
  *	functions declerations, work with char
@@ -60,52 +62,52 @@ int prosing_string_length(char *);
 /*
  *	compare two string , it works like strcpm
  */
-int prosing_string_compare(string *,char *);
-int prosing_string_ncompare(string *,char *,int);
+int prosing_string_compare(string *, char *);
+int prosing_string_ncompare(string *, char *, int);
 
-bool prosing_string_endwith(string *,char *);
+bool prosing_string_endwith(string *, char *);
 
 /*
  *	append t to last of str
  */
-char *prosing_string_append(string *,char *);
-char *prosing_string_append_char(string *,char);
+char *prosing_string_append(string *, char *);
+char *prosing_string_append_char(string *, char);
 
 /*
  *	insert char at specified location in string
  */
-char *prosing_string_insert_char(string *,char,int);
+char *prosing_string_insert_char(string *, char, int);
 
 /*
  *	insert string into string
  */
-char *prosing_string_insert_string(string *,char *,int);
+char *prosing_string_insert_string(string *, char *, int);
 
 /*
  *	substing and save new string in given str
  */
-char *prosing_string_substring(string *,int,int);
+char *prosing_string_substring(string *, int, int);
 
 /*
  *	remove character at given position from string
  */
-char *prosing_string_remove(string *,int);
-char *prosing_string_remove_range(string *,int,int);
+char *prosing_string_remove(string *, int);
+char *prosing_string_remove_range(string *, int, int);
 
 /*
  *	replace old with new in given string and return string
  */
-char *prosing_string_replace(string *,char *,char *);
+char *prosing_string_replace(string *, char *, char *);
 
 /*
  *	split given stirng by another string
  */
-char **prosing_string_split(string *,char *);
+char **prosing_string_split(string *, char *);
 
 /*
  *	make string and join args elements
  */
-string *prosing_string_join(char **args,char *);
+string *prosing_string_join(char **args, char *);
 
 // ===========================
 // implementation of functions
@@ -155,7 +157,7 @@ char *prosing_string_reverse(string *s)
 	return s->value;
 }
 
-bool prosing_string_contains_char(string *str,char c)
+bool prosing_string_contains_char(string *str, char c)
 {
 	char *s = str->value;
 	while (*s) {
@@ -166,7 +168,7 @@ bool prosing_string_contains_char(string *str,char c)
 	return false;
 }
 
-int prosing_string_ncontains_char(string *str,char c)
+int prosing_string_ncontains_char(string *str, char c)
 {
 	char *s = str->value;
 	int res = 0;
@@ -178,7 +180,7 @@ int prosing_string_ncontains_char(string *str,char c)
 	return res;
 }
 
-bool prosing_string_contains_string(string *str,char *s)
+bool prosing_string_contains_string(string *str, char *s)
 {
 	int s_len = prosing_string_length(s);
 	// if second string is bigger than first one , it's not possible to be in first one :)
@@ -203,7 +205,7 @@ bool prosing_string_contains_string(string *str,char *s)
 	return false;
 }
 
-int prosing_string_ncontains_string(string *str,char *s)
+int prosing_string_ncontains_string(string *str, char *s)
 {
 	int s_len = prosing_string_length(s);
 	// if second string is bigger than first one , it's not possible to be in first one :)
@@ -229,7 +231,7 @@ int prosing_string_ncontains_string(string *str,char *s)
 	return res;
 }
 
-int prosing_string_compare(string *s1,char *s2)
+int prosing_string_compare(string *s1, char *s2)
 {
     char *s = s1->value;
     char *t = s2;
@@ -240,7 +242,7 @@ int prosing_string_compare(string *s1,char *s2)
 	return *s - *t;
 }
 
-int prosing_string_ncompare(string *s1,char *s2,int n)
+int prosing_string_ncompare(string *s1, char *s2, int n)
 {
     char *s = s1->value;
     char *t = s2;
@@ -251,7 +253,7 @@ int prosing_string_ncompare(string *s1,char *s2,int n)
 	return *s - *t;
 }
 
-bool prosing_string_endwith(string *str,char *t)
+bool prosing_string_endwith(string *str, char *t)
 {
     char *bs = str->value;
     char *bt = t;
@@ -268,7 +270,7 @@ bool prosing_string_endwith(string *str,char *t)
    	return false;
 }
 
-char *prosing_string_append(string *str,char *t)
+char *prosing_string_append(string *str, char *t)
 {
 	assert(t != NULL);
 	int t_len = prosing_string_length(t);
@@ -280,7 +282,7 @@ char *prosing_string_append(string *str,char *t)
 	return str->value;
 }
 
-char *prosing_string_append_char(string *str,char c)
+char *prosing_string_append_char(string *str, char c)
 {
 	str->len += 1;
 	str->value = (char *)realloc(str->value,str->len + 1);
@@ -290,7 +292,7 @@ char *prosing_string_append_char(string *str,char c)
 	return str->value;
 }
 
-char *prosing_string_insert_char(string *str,char c,int at)
+char *prosing_string_insert_char(string *str, char c, int at)
 {
 	at--;
 	assert(at <= str->len && at >= 0);
@@ -302,7 +304,7 @@ char *prosing_string_insert_char(string *str,char c,int at)
 	return str->value;
 }
 
-char *prosing_string_insert_string(string *str,char *s,int at)
+char *prosing_string_insert_string(string *str, char *s, int at)
 {
 	at--;
 	assert(at <= str->len && at >= 0);
@@ -317,7 +319,7 @@ char *prosing_string_insert_string(string *str,char *s,int at)
 	return str->value;
 }
 
-char *prosing_string_substring(string *str,int from,int to)
+char *prosing_string_substring(string *str, int from, int to)
 {
 	from--;
 	to--;
@@ -331,7 +333,7 @@ char *prosing_string_substring(string *str,int from,int to)
 	return str->value;
 }
 
-char *prosing_string_remove(string *str,int at)
+char *prosing_string_remove(string *str, int at)
 {
 	at--;
 	assert(at <= str->len && at >= 0);
@@ -341,7 +343,7 @@ char *prosing_string_remove(string *str,int at)
 	return str->value;
 }
 
-char *prosing_string_remove_range(string *str,int from,int to)
+char *prosing_string_remove_range(string *str, int from, int to)
 {
 	from--;
 	to--;
@@ -357,7 +359,7 @@ char *prosing_string_remove_range(string *str,int from,int to)
 	return str->value;
 }
 
-char *prosing_string_replace(string *str,char *old,char *new)
+char *prosing_string_replace(string *str, char *old, char *new)
 {
 	int old_len = prosing_string_length(old);
 	int new_len = prosing_string_length(new);
@@ -386,7 +388,7 @@ char *prosing_string_replace(string *str,char *old,char *new)
 	return str->value;
 }
 
-char **prosing_string_split(string *str,char *delim)
+char **prosing_string_split(string *str, char *delim)
 {
 #define BUFSIZE 5
 #define ELEMSIZE 20
@@ -441,7 +443,7 @@ go_next:
 	return buf;
 }
 
-string *prosing_string_join(char **args,char *with)
+string *prosing_string_join(char **args, char *with)
 {
     int with_len = prosing_string_length(with);
     int len = 0;

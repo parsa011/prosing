@@ -1,0 +1,14 @@
+todo :
+	- impelement prosing_format(char *, ...) function to create string by format
+	- assign foart to existring string by prosing_assign_format(string, char *, ....)
+	- trim function , trim for start and end trim , trim_end and trim_end
+	- prosing_to_upper(string) for convert strgin content to upper
+	- prosing_to_lower(strign) , oppsite of to upper :)))
+	- prosng_empty_or_null(string) functiono to test if given string is null of ""
+	- prosing_free(string) for make string free
+	- add case sensitive or in.. for compare functions
+	- new function for extract string from file
+	- regex string search :)))
+	- sort function for string
+
+done :
