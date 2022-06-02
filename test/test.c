@@ -80,7 +80,7 @@ bool test_endwith()
 bool test_string_append()
 {
 	string *str = prosing_string_init("parsa");
-	prosing_string_append(str," mahmoudy");
+	prosing_string_append(str, " mahmoudy");
 	return strcmp(str->value,"parsa mahmoudy") == 0;
 }
 
