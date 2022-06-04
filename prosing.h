@@ -11,6 +11,8 @@
 #include <stdbool.h>
 
 #define null_str ((string){ NULL, 0 })
+#define IS_LOWER(c) (c >= 'a' && c <= 'z')
+#define IS_UPPER(c) (c >= 'A' && c <= 'Z')
 
 typedef struct string_t {
 	char *value;
@@ -108,6 +110,9 @@ char **prosing_string_split(string *, char *);
  *	make string and join args elements
  */
 string *prosing_string_join(char **args, char *);
+
+void prosing_string_to_upper(string *);
+void prosing_string_to_lower(string *);
 
 // ===========================
 // implementation of functions
@@ -463,6 +468,26 @@ string *prosing_string_join(char **args, char *with)
     	}
 	}
 	return str;
+}
+
+void prosing_string_to_upper(string *str)
+{
+	char *ptr = str->value;
+	while (*ptr) {
+		if (IS_LOWER(*ptr))
+			*ptr -= 'a' - 'A';
+		ptr++;
+	}
+}
+
+void prosing_string_to_lower(string *str)
+{
+	char *ptr = str->value;
+	while (*ptr) {
+		if (IS_UPPER(*ptr))
+			*ptr += 'a' - 'A';
+		ptr++;
+	}
 }
 
 #endif

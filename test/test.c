@@ -164,6 +164,21 @@ bool test_join()
 	string *str = prosing_string_join(array," ");
 	return strcmp(str->value,"parsa mahmoudy") == 0;
 }
+
+bool test_upper()
+{
+	string *str = prosing_string_init("parsa");
+	prosing_string_to_upper(str);
+	return strcmp(str->value, "PARSA") == 0;
+}
+
+bool test_lower()
+{
+	string *str = prosing_string_init("PARSA");
+	prosing_string_to_lower(str);
+	return strcmp(str->value, "parsa") == 0;
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
@@ -185,7 +200,9 @@ const char *test_functions_names[] = {
 	"remove range",
 	"replace",
 	"string split",
-	"join"
+	"join",
+	"to upper case",
+	"to lower caes"
 };
 
 bool (*test_functions[])() = {
@@ -209,7 +226,9 @@ bool (*test_functions[])() = {
 	test_remove_range,
 	test_replace,
 	test_split,
-	test_join
+	test_join,
+	test_upper,
+	test_lower
 };
 
 void log_res(char *state,const char *fmt,...)

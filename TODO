@@ -1,6 +1,6 @@
 todo :
 	- impelement prosing_format(char *, ...) function to create string by format
-	- assign foart to existring string by prosing_assign_format(string, char *, ....)
+	- assign format to existing string by prosing_assign_format(string, char *, ....)
 	- trim function , trim for start and end trim , trim_end and trim_end
 	- prosing_to_upper(string) for convert strgin content to upper
 	- prosing_to_lower(strign) , oppsite of to upper :)))
