@@ -114,6 +114,8 @@ string *prosing_string_join(char **args, char *);
 void prosing_string_to_upper(string *);
 void prosing_string_to_lower(string *);
 
+bool prosing_emptry_or_null(string *);
+
 // ===========================
 // implementation of functions
 // ===========================
@@ -488,6 +490,11 @@ void prosing_string_to_lower(string *str)
 			*ptr += 'a' - 'A';
 		ptr++;
 	}
+}
+
+bool prosing_empty_or_null(string *str)
+{
+	return str->value == NULL || prosing_string_compare(str, "") == 0;
 }
 
 #endif

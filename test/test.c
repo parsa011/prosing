@@ -179,6 +179,12 @@ bool test_lower()
 	return strcmp(str->value, "parsa") == 0;
 }
 
+bool test_empty_null()
+{
+	string *str = prosing_string_init("");
+	return prosing_empty_or_null(str);
+}
+
 const char *test_functions_names[] = {
     "init string",
     "string duplicate",
@@ -202,7 +208,8 @@ const char *test_functions_names[] = {
 	"string split",
 	"join",
 	"to upper case",
-	"to lower caes"
+	"to lower caes",
+	"string null or empty"
 };
 
 bool (*test_functions[])() = {
@@ -228,7 +235,8 @@ bool (*test_functions[])() = {
 	test_split,
 	test_join,
 	test_upper,
-	test_lower
+	test_lower,
+	test_empty_null
 };
 
 void log_res(char *state,const char *fmt,...)
